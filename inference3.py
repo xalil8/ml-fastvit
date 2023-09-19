@@ -11,11 +11,10 @@ print(device)
 model = create_model("fastvit_t8")
 checkpoint = torch.load('model_zoo/fastvit_t8.pth.tar')
 model.load_state_dict(checkpoint['state_dict'])
+
 model.eval()      
 model_inf = reparameterize_model(model)
 model_inf.to(device)
-
-
 
 
 
@@ -32,8 +31,9 @@ tensor = tensor.unsqueeze(0)
 # For inference
 
 torch.cuda.empty_cache()
-output = model_inf(tensor)
-output_tensor = F.softmax(output, dim=1)
+with torch.no_grad():
+    output = model_inf(tensor)
+    output_tensor = F.softmax(output, dim=1)
 
 
 print(output_tensor)
