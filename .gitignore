@@ -76,7 +76,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-
+model_zoo/*
+test_images/*
 # IPython
 profile_default/
 ipython_config.py
